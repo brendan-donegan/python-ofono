@@ -20,8 +20,27 @@ class SimManager:
     def pin_lock(pin_type, pin):
         """Lock the SIM with a PIN.
 
-        :param pin_type: The type of PIN to lock the SIM with
+        :param pin_type: The type of PIN to lock the SIM with, pin or pin2
         :param pin: The PIN with which to lock the SIM
         """
         if not self.is_pin_locked():
-            self._manager.LockPin('pin', pin)
+            self._manager.LockPin(pin_type, pin)
+
+    def pin_unlock(pin_type, pin):
+        """Remove the PIN lock from a SIM.
+
+        :param pin_type: The type of PIN the SIM has been
+        locked with, pin or pin2
+        :param pin: The PIN with which to unlock the SIM
+        """
+        if self.is_pin_locked():
+            self._manager.UnlockPin(pin_type, pin)
+        
+    def enter_pin(pin_type, pin):
+        """Enter the PIN to allow a PIN locked SIM to be used.
+
+        :param pin_type: The type of PIN the SIM is
+        locked with, pin or pin2
+        :param pin: The PIN to enter
+        """
+        self._manager.EnterPin(pin_type, pin)
