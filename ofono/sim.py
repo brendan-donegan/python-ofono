@@ -7,7 +7,8 @@ class SimManager:
 
     def __init__(self, sim_number=0):
         bus = dbus.SystemBus()
-        modem = bus.get_object('org.ofono', '/ril_{}'.format(sim_number)                self._manager = dbus.Interface(modem, SIM_MANAGER_INTERFACE)
+        modem = bus.get_object('org.ofono', '/ril_{}'.format(sim_number))
+        self._manager = dbus.Interface(modem, SIM_MANAGER_INTERFACE)
 
     def is_pin_locked():
         """Check if the SIM is locked with a PIN.
